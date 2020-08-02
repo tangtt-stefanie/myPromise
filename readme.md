@@ -1,5 +1,6 @@
 本promise符合Promises/A+标准
 实现了:
+
     Promise.all(iterable)
     Promise.allSettled(iterable)
     Promise.any(iterable)
@@ -14,6 +15,7 @@
 
 
 执行顺序:
+
     1.new promise(executor)--(假设名字叫做firstPromise)  时候设置好各种初始状态,status=PENDING,然后执行executor
 
     (注：接下来的情况以成功为例,失败的情况类似)
@@ -66,7 +68,6 @@
         1.then(onfullfilled)中进行对onfullfilled的处理是在新创建的promise的executor中进行的,处理过程依赖then的主体的this.status和this.value
         2.如果promise的executor为异步则之后执行的该promise的then方法中由于当前pormise.status为PENDING,所以只进行订阅,而其他情况则为onfullfilled被包裹在setTimeout等待当前栈执行完毕后再直接执行,此两种情况都会导致后面的then方法优先依次执行
         3.同步和异步只在firstPromise的executor有区别，之后then中重新new的promise的executor都未对当前promise进行status的更改，所以后面的then全部处理为status==PENDING的情况只进行订阅而不是放在setTimeout的宏任务中待执行
-
-
+        
 测试是否符合Promise/A+标准  : promises-aplus-tests promise.js(promise文件)
 作者测试环境:node v10.16.0
