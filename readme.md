@@ -14,7 +14,7 @@
 
 
 
-执行顺序:
+执行顺序模拟:
 
     1.new promise(executor)--(假设名字叫做firstPromise)  时候设置好各种初始状态,status=PENDING,然后执行executor
 
